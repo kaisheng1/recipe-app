@@ -12,7 +12,6 @@ export const getRecipes = async (limit = 10) => {
 		q: 'chicken',
 		to: limit
 	};
-	console.log(params);
 	const response = await axios.get(BASE_URL, { params });
 	const data = await response.data;
 	const hits = await data.hits;
