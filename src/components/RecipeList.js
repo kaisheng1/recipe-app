@@ -3,6 +3,7 @@ import { Context } from '../context';
 //bootstrap
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Spinner from 'react-bootstrap/Spinner';
 //components
 import RecipeCard from './RecipeCard';
 import SearchBar from './SearchBar';
@@ -74,7 +75,9 @@ const RecipeList = () => {
 			<SearchBar initialSearch={initialSearch} onSearch={searchRecipes} />
 			<Row>
 				{loading && !error ? (
-					<span className="ml-4">Loading...</span>
+					<span className="ml-4">
+						<Spinner animation="border" variant="dark" />
+					</span>
 				) : (
 					recipes.map((recipe) => {
 						return (
@@ -84,7 +87,7 @@ const RecipeList = () => {
 						);
 					})
 				)}
-				{error && <span className="ml-4">Loading...</span>}
+				{error && <span className="ml-4">{error}</span>}
 			</Row>
 			<PaginationBar switchPage={switchPage} />
 		</div>
