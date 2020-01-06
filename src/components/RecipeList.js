@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Context } from '../context';
 //bootstrap
 import Row from 'react-bootstrap/Row';
@@ -13,12 +13,17 @@ import { getRecipeByQuery } from '../services/recipe';
 const RecipeList = () => {
 	const { state, dispatch } = useContext(Context);
 	const { recipes } = state;
+	const initialSearch = 'chicken';
 	const searchRecipes = (value) => {
 		getRecipeByQuery(value).then((res) => dispatch({ type: 'SET_RECIPES', payload: res }));
 	};
+	//for first time
+	useEffect(() => {
+		getRecipeByQuery(initialSearch).then((res) => dispatch({ type: 'SET_RECIPES', payload: res }));
+	}, []);
 	return (
 		<div>
-			<SearchBar onSearch={searchRecipes} />
+			<SearchBar initialSearch={initialSearch} onSearch={searchRecipes} />
 			<Row>
 				{recipes.map((recipe) => {
 					return (

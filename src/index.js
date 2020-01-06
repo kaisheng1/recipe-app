@@ -6,7 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 //todo:
 //maybe add pagination
-//maybe styling recipe detail a bit
 
 ReactDOM.render(
 	<ContextProvider>

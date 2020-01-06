@@ -27,7 +27,7 @@ const popover = ({ label, dietLabels, healthLabels, ingredientLines, calories, c
 						{l}
 					</Badge>
 				))}
-			<h6>Ingredients: </h6>
+			<h6 className="mt-2">Ingredients: </h6>
 			<ul>{ingredientLines && ingredientLines.map((l) => <li>{l}</li>)}</ul>
 		</Popover.Content>
 	</Popover>

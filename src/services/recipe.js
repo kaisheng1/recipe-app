@@ -19,12 +19,13 @@ export const getRecipes = async (limit = 10) => {
 };
 
 //get recipes by search results
-export const getRecipeByQuery = async (query, limit = 10) => {
+export const getRecipeByQuery = async (query, from = 0, to = 10) => {
 	const params = {
 		app_key: APP_KEY,
 		app_id: APP_ID,
 		q: query,
-		to: limit
+		from: from,
+		to: to
 	};
 	const response = await axios.get(BASE_URL, { params });
 	const data = await response.data;
