@@ -4,9 +4,6 @@ import App from './App';
 import { ContextProvider } from './context';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-//todo:
-//maybe add pagination
-
 ReactDOM.render(
 	<ContextProvider>
 		<App />
