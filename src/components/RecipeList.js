@@ -81,8 +81,8 @@ const RecipeList = () => {
 				) : (
 					recipes.map((recipe) => {
 						return (
-							<Col md={6} lg={4} key={recipe.uri}>
-								<RecipeCard {...recipe} dispatch={dispatch} />
+							<Col md={6} lg={4}>
+								<RecipeCard {...recipe} key={recipe.uri} dispatch={dispatch} />
 							</Col>
 						);
 					})

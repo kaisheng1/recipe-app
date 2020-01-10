@@ -11,19 +11,19 @@ const popover = ({ label, dietLabels, healthLabels, ingredientLines, calories, c
 		<Popover.Content>
 			{dietLabels &&
 				dietLabels.map((l) => (
-					<Badge className="mr-1" variant="info">
+					<Badge className="mr-1" variant="info" key={l}>
 						{l}
 					</Badge>
 				))}
 			{healthLabels &&
 				healthLabels.map((l) => (
-					<Badge className="mr-1" variant="warning">
+					<Badge className="mr-1" variant="warning" key={l}>
 						{l}
 					</Badge>
 				))}
 			{cautions &&
 				cautions.map((l) => (
-					<Badge className="mr-1" variant="danger">
+					<Badge className="mr-1" variant="danger" key={l}>
 						{l}
 					</Badge>
 				))}

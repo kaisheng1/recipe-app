@@ -3,29 +3,7 @@ import React, { createContext, useReducer, useMemo } from 'react';
 const Context = createContext();
 
 const initialState = {
-	recipes: [
-		{
-			recipe: {
-				uri: 1,
-				label: 'chicken salad'
-			},
-			bookmarked: false
-		},
-		{
-			recipe: {
-				uri: 2,
-				label: 'chicken rice'
-			},
-			bookmarked: false
-		},
-		{
-			recipe: {
-				uri: 3,
-				label: 'chicken noodle'
-			},
-			bookmarked: false
-		}
-	],
+	recipes: [],
 	favourite: []
 };
 
@@ -68,8 +46,17 @@ const reducer = (state, action) => {
 };
 
 const ContextProvider = ({ children }) => {
-	const [ state, dispatch ] = useReducer(reducer, initialState);
-	const value = useMemo(() => ({ state, dispatch }), [ state, dispatch ]);
+	const [ state, dispatch ] = useReducer(reducer, initialState, () => {
+		const localData = localStorage.getItem('state');
+		return localData ? JSON.parse(localData) : [];
+	});
+	const value = useMemo(
+		() => {
+			localStorage.setItem('state', JSON.stringify(state));
+			return { state, dispatch };
+		},
+		[ state, dispatch ]
+	);
 	return <Context.Provider value={value}>{children}</Context.Provider>;
 };
 
