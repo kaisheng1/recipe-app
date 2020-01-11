@@ -46,13 +46,14 @@ const reducer = (state, action) => {
 };
 
 const ContextProvider = ({ children }) => {
-	const [ state, dispatch ] = useReducer(reducer, initialState, () => {
-		const localData = localStorage.getItem('state');
-		return localData ? JSON.parse(localData) : [];
-	});
+	const [ state, dispatch ] = useReducer(reducer, initialState);
+	// , () => {
+	// 	const localData = localStorage.getItem('state');
+	// 	return localData ? JSON.parse(localData) : [];
+	// }
 	const value = useMemo(
 		() => {
-			localStorage.setItem('state', JSON.stringify(state));
+			//localStorage.setItem('state', JSON.stringify(state));
 			return { state, dispatch };
 		},
 		[ state, dispatch ]
