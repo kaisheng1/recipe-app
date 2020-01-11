@@ -48,7 +48,7 @@ const reducer = (state, action) => {
 const ContextProvider = ({ children }) => {
 	const [ state, dispatch ] = useReducer(reducer, initialState, () => {
 		const localData = localStorage.getItem('state');
-		return localData ? JSON.parse(localData) : [];
+		return localData ? JSON.parse(localData) : initialState;
 	});
 
 	const value = useMemo(
