@@ -1,11 +1,13 @@
-import React, { createContext, useReducer, useMemo } from 'react';
+import React, { createContext, useReducer, useEffect } from 'react';
 
 const Context = createContext();
 
-const initialState = {
-	recipes: [],
-	favourite: []
-};
+const initialState = localStorage.getItem('state')
+	? JSON.parse(localStorage.getItem('state'))
+	: {
+			recipes: [],
+			favourite: []
+		};
 
 const reducer = (state, action) => {
 	switch (action.type) {
@@ -46,18 +48,15 @@ const reducer = (state, action) => {
 };
 
 const ContextProvider = ({ children }) => {
-	const [ state, dispatch ] = useReducer(reducer, initialState, () => {
-		const localData = localStorage.getItem('state');
-		return localData ? JSON.parse(localData) : initialState;
-	});
-
-	const value = useMemo(
+	const [ state, dispatch ] = useReducer(reducer, initialState);
+	useEffect(
 		() => {
 			localStorage.setItem('state', JSON.stringify(state));
-			return { state, dispatch };
 		},
-		[ state, dispatch ]
+		[ state ]
 	);
+	const value = { state, dispatch };
+
 	return <Context.Provider value={value}>{children}</Context.Provider>;
 };
 
