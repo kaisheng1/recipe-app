@@ -2,12 +2,13 @@ import React, { createContext, useReducer, useEffect } from 'react';
 
 const Context = createContext();
 
-const initialState = localStorage.getItem('state')
-	? JSON.parse(localStorage.getItem('state'))
-	: {
-			recipes: [],
-			favourite: []
-		};
+const initialState =
+	localStorage.getItem('state') !== '[]' || localStorage.getItem('state') !== undefined
+		? JSON.parse(localStorage.getItem('state'))
+		: {
+				recipes: [],
+				favourite: []
+			};
 
 const reducer = (state, action) => {
 	switch (action.type) {

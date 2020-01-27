@@ -10,9 +10,9 @@ import SearchBar from './SearchBar';
 const FavouriteList = () => {
 	const { state, dispatch } = useContext(Context);
 	const [ search, setSearch ] = useState('');
-	const favourite = state.favourite.filter((recipe) =>
-		recipe.recipe.label.toLowerCase().includes(search.toLowerCase())
-	);
+	const favourite = state.favourite
+		? state.favourite.filter((recipe) => recipe.recipe.label.toLowerCase().includes(search.toLowerCase()))
+		: null;
 
 	const onSearch = (value) => {
 		setSearch(value);
@@ -22,13 +22,14 @@ const FavouriteList = () => {
 		<div>
 			<SearchBar onSearch={onSearch} />
 			<Row>
-				{favourite.map((recipe) => {
-					return (
-						<Col md={6} lg={4} key={recipe.uri}>
-							<RecipeCard {...recipe} dispatch={dispatch} />
-						</Col>
-					);
-				})}
+				{favourite &&
+					favourite.map((recipe) => {
+						return (
+							<Col md={6} lg={4} key={recipe.uri}>
+								<RecipeCard {...recipe} dispatch={dispatch} />
+							</Col>
+						);
+					})}
 			</Row>
 		</div>
 	);

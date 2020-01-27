@@ -74,10 +74,12 @@ const RecipeList = () => {
 		<div>
 			<SearchBar initialSearch={initialSearch} onSearch={searchRecipes} />
 			<Row>
-				{loading && !error ? (
+				{loading ? (
 					<span className="ml-4">
 						<Spinner animation="border" variant="dark" />
 					</span>
+				) : error ? (
+					<span className="ml-4">{error}</span>
 				) : (
 					recipes.map((recipe) => {
 						return (
@@ -87,7 +89,6 @@ const RecipeList = () => {
 						);
 					})
 				)}
-				{error && <span className="ml-4">{error}</span>}
 			</Row>
 			<PaginationBar switchPage={switchPage} />
 		</div>
